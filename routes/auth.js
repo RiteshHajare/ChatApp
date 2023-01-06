@@ -187,7 +187,7 @@ app.post("/changepassword",(req,res)=>{
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/transithome",
+    callbackURL: "https://newchatapp-mn65.onrender.com/transithome",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -219,7 +219,7 @@ app.get('/transithome',(req,res)=>{
     passport.authenticate('google',(err,user,info)=>{
       // console.log(user);
       const oAuth = jwt.sign({_id : user._id}, process.env.JWT_SECRET);
-     res.redirect( "http://localhost:3000/home?token="+oAuth);
+     res.redirect( "https://lighthearted-kleicha-499492.netlify.app/home?token="+oAuth);
     })(req,res);
   });
 
@@ -228,7 +228,7 @@ app.get('/transithome',(req,res)=>{
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "/githubtohome",
+    callbackURL: "https://newchatapp-mn65.onrender.com/githubtohome",
     scope: ["user:email"]
   },
   function(accessToken, refreshToken, profile, done) {
@@ -260,7 +260,7 @@ app.get('/githubauth',
       passport.authenticate('github',(err,user,info)=>{
         // console.log(user);
          const oAuth = jwt.sign({_id : user._id}, process.env.JWT_SECRET);
-        res.redirect( "http://localhost:3000/home?token="+oAuth);
+        res.redirect( "https://lighthearted-kleicha-499492.netlify.app/home?token="+oAuth);
       })(req,res);
     });
 
